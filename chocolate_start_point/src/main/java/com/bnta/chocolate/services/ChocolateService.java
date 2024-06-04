@@ -5,6 +5,7 @@ import com.bnta.chocolate.repositories.ChocolateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,10 +28,19 @@ public class ChocolateService {
         chocolateRepository.save(chocolate);
         return chocolate;
     }
+
+    public List<Chocolate> getAllOver60Chocolate(){
+            List<Chocolate> allChocolates = chocolateRepository.findAll();
+        List<Chocolate> over60Chocolate = new ArrayList<>();
+        for(Chocolate chocolate : allChocolates){
+            if(chocolate.getCocoaPercentage() >= 60){
+                over60Chocolate.add(chocolate);
+            }
+        }
+        return over60Chocolate;
+    }
+
+
 }
 
 
-//
-//Create a package called services and two classes: ChocolateService and EstateService.
-//Use these classes to create methods to handle saving Chocolate and Estate objects to the database.
-//This is your service layer and will handle all interactions with the repositories.
