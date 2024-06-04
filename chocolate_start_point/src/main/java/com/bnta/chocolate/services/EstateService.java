@@ -16,7 +16,7 @@ public class EstateService {
     @Autowired
     EstateRepository estateRepository;
 
-    public List<Estate> getAllEstate(){
+    public List<Estate> getAllEstates(){
         return estateRepository.findAll();
     }
 
