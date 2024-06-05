@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface ChocolateRepository extends JpaRepository<Chocolate, Long> {
 
-    List<Chocolate> findChocolateByPercentage();
-}
+    List<Chocolate> findByCocoaPercentageGreaterThanOrEqualTo(int cocoaPercentage);
+} // specific naming conventions for it to do it for us

@@ -24,20 +24,12 @@ public class ChocolateService {
         return chocolateRepository.findById(id);
     }
 
-    public Chocolate saveChocolate(Chocolate chocolate){
+    public void saveChocolate(Chocolate chocolate){
         chocolateRepository.save(chocolate);
-        return chocolate;
     }
 
-    public List<Chocolate> getAllOver60Chocolate(){
-            List<Chocolate> allChocolates = chocolateRepository.findAll();
-        List<Chocolate> over60Chocolate = new ArrayList<>();
-        for(Chocolate chocolate : allChocolates){
-            if(chocolate.getCocoaPercentage() >= 60){
-                over60Chocolate.add(chocolate);
-            }
-        }
-        return over60Chocolate;
+    public List<Chocolate> getChocolatesWithCocoaPercentageGreaterThan(int cocoaPercentage){
+        return chocolateRepository.findByCocoaPercentageGreaterThanOrEqualTo(cocoaPercentage);
     }
 
 

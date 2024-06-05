@@ -19,16 +19,15 @@ public class ChocolateController {
 
     // localhost:8080/chocolates OR localhost:8080/chocolates?isOver60=true
     @GetMapping
-    public ResponseEntity<List<Chocolate>> getAllChocolate(@RequestParam Optional<Boolean> isOver60){
+    public ResponseEntity<List<Chocolate>> getAllChocolate(@RequestParam(required = false, name = "cocoaPercentage") Integer cocoaPercentage){
         List<Chocolate> chocolates;
-        if(chocolates.getCocoaPercentage() >= 60){
-            chocolates = chocolateService.getAllOver60Chocolate();
+        if(cocoaPercentage != null){
+            return new ResponseEntity<>(chocolateService.getChocolatesWithCocoaPercentageGreaterThan(cocoaPercentage), HttpStatus.OK);
         } else {
-            chocolates = chocolateService.getAllChocolate();
+            return new ResponseEntity<>(chocolateService.getAllChocolate(), HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
     }
-    
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<Chocolate> getChocolateById(@PathVariable Long id){
         Optional<Chocolate> chocolate = chocolateService.getChocolateById(id);
